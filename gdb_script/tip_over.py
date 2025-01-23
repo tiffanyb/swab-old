@@ -61,6 +61,7 @@ class ArgPrintBreakpoint(gdb.Breakpoint):
         log.write(f"Breakpoint hit at 0x{self.address:x}. New {self.name} is {r1_value}\n")
         log.flush()
         servo.set('r1_rover', r1_value, check_position=True, maxturn=180)
+        motor.set(2400)
         # return True  # DisContinue execution
         return False # Continue execution
 
@@ -93,14 +94,11 @@ class LoopBreakpoint(gdb.Breakpoint):
         msg = f"Infinite loop hit at 0x{self.address:x}.\n"
         # print(msg)
         # log.write(msg)
-        if self.hit == 0:
-            msg = "initial setup"
-            # print(msg)
-            set_byte(0x20000514, 1)
-            set_byte(0x200003fd, 0)
-            set_byte(UPDATE_COMPASS, 1)
+        set_byte(0x20000514, 0)
+        set_byte(0x200003fd, 1)
+        set_byte(0x200003fe, 0)
+        set_byte(0x200003fc, 1)
         self.hit += 1
-
         if self.hit > 300:
             log.close()
             gdb.execute('quit', to_string=True)
@@ -131,6 +129,8 @@ def function_execute():
     rover_name = 'r1_rover'
     servo.init('default', rover_name)
     motor.init(rover_name)
+    motor.set(240)
+    servo.set(rover_name, 0)
     compass.init('default', rover_name)
     print("Setting up for throttle and servo value interception")
     # set up a read watch points for throttle
