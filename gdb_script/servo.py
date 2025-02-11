@@ -171,7 +171,7 @@ def set(rover_name, value, check_position=False, maxturn=None):
     while True:
         x, y, z = get_current_pose()
         if check_position:
-            if abs(g_x - x) > 2 or abs(g_y - y) > 2 or abs(g_z - z) > 2:
+            if abs(g_x - x) > 20 or abs(g_y - y) > 20 or abs(g_z - z) > 20:
                 g_x = x
                 g_y = y
                 g_z = z
@@ -186,6 +186,7 @@ def set(rover_name, value, check_position=False, maxturn=None):
     print(f"Current position: x: {x}, y: {y}, z: {z}")
     # Example: set "my_rover" to heading = 180 deg (yaw=180) at position (1,2,0).
     if turn:
+        print(f"SUDDEN TURN!!!")
         set_pose_via_service(
         model_name=rover_name,
         x=x, y=y, z=z,

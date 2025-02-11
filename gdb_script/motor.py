@@ -7,8 +7,8 @@ a_node = Node()
 def set(value): 
     if publisher is not None:
         msg = Actuators()
-        msg.velocity.append(float(value) * 200000)
-        msg.velocity.append(float(value) * 200000)
+        msg.velocity.append(float(value * 2000) )
+        msg.velocity.append(float(value * 2000) )
         time.sleep(2)
         publisher.publish(msg)
         print(f"Send Throttle Value {value} to Gazebo")

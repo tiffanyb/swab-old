@@ -60,8 +60,8 @@ class ArgPrintBreakpoint(gdb.Breakpoint):
         # print(f"Breakpoint hit at 0x{self.address:x}. New {self.name} is {r1_value}")
         log.write(f"Breakpoint hit at 0x{self.address:x}. New {self.name} is {r1_value}\n")
         log.flush()
-        servo.set('r1_rover', r1_value, check_position=True, maxturn=180)
-        motor.set(2400)
+        servo.set('r1_rover', -180, check_position=True, maxturn=180)
+        motor.set(240000)
         # return True  # DisContinue execution
         return False # Continue execution
 
