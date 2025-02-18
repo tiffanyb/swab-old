@@ -38,12 +38,16 @@ You start to see simulation from the VNC client/viewer.
 
 ### Start from terminal without GUI
 
-Inside the container: run `./entry.sh server emi/stop/tip`
-You can observe the rover's movement by the tracker shown in the tmux panel.
+There are two ways:
+
+  1. Inside the container: run `./entry.sh server emi/stop/tip`
+  2. Outside the container: run `docker run -ti swab /app/entry.sh server emi/stop/tip`
+
+You can observe the rover's movement by the tracker panel (second panel from the left) shown in the tmux session.
 
 ## How to develop and debug
 
-I uses the terminal + GUI option. In the topic tracking pane, I filtered the output to be r1\_rover specific using `grep -B 1 -A 13 "r1_rover"`.
+I use the terminal + GUI option. In the topic tracking pane, I filtered the output to be r1\_rover specific using `grep -B 1 -A 13 "r1_rover"`.
 
 ## Known Issue
 

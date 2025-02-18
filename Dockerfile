@@ -24,8 +24,8 @@ COPY gdb_script /app/gdb_script
 COPY entry.sh /app/entry.sh
 COPY vis_start.sh /app/vis_start.sh
 COPY server_start.sh /app/server_start.sh
-COPY firmwareM4_executable.elf /app/firmwareM4_executable.elf
+COPY firmwarem4_executable.elf /app/firmwareM4_executable.elf
 
-RUN x11vnc -usepw -create -forever
+# RUN x11vnc -usepw -create -forever
 
-CMD /bin/bash -c "/app/entry.sh server stop"
+# CMD /bin/bash -c "/app/entry.sh server stop"
