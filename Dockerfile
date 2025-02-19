@@ -16,7 +16,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
 
 RUN mkdir /app
 WORKDIR /app
-# ADD --keep-git-dir=false https://github.com/px4/px4-gazebo-models.git /app/resources
+ADD --keep-git-dir=false https://github.com/px4/px4-gazebo-models.git /app/resources
 ENV GZ_SIM_RESOURCE_PATH=/app/resources/worlds:/app/resources/models
 
 COPY src /app/src 
@@ -26,6 +26,10 @@ COPY vis_start.sh /app/vis_start.sh
 COPY server_start.sh /app/server_start.sh
 COPY firmwarem4_executable.elf /app/firmwareM4_executable.elf
 
+RUN apt-get install -y gdb-multiarch
+RUN mkdir -p /user/data
+RUN echo 'alias firmware="python3 /app/src/publisher_firmware.py"' >> ~/.bashrc
+RUN echo 'alias gdb="gdb-multiarch"' >> ~/.bashrc
 # RUN x11vnc -usepw -create -forever
 
 # CMD /bin/bash -c "/app/entry.sh server stop"
