@@ -30,6 +30,8 @@ RUN apt-get install -y gdb-multiarch
 RUN mkdir -p /user/data
 RUN echo 'alias firmware="python3 /app/src/publisher_firmware.py"' >> ~/.bashrc
 RUN echo 'alias gdb="gdb-multiarch"' >> ~/.bashrc
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y x11vnc xvfb
 # RUN x11vnc -usepw -create -forever
 
 # CMD /bin/bash -c "/app/entry.sh server stop"
